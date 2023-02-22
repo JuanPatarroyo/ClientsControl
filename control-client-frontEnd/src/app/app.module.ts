@@ -12,6 +12,7 @@ import { ConfigurationComponent } from './components/configuration/configuration
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FootbarComponent } from './components/footbar/footbar.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
