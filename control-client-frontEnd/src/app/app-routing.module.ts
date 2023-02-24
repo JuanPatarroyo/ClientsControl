@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './components/board/board.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -21,7 +21,9 @@ const routes: Routes =[
 @NgModule({
   declarations: [],
   imports: [
+    RouterModule.forRoot(routes),
     CommonModule
-  ]
+  ],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
