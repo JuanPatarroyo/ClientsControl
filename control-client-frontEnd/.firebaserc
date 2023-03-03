@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "clientscontrol-87469"
+  },
+  "targets": {
+    "clientscontrol-87469": {
+      "hosting": {
+        "control-client": [
+          "clientscontrol-87469"
+        ]
+      }
+    }
+  }
+}
