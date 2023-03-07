@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Client } from 'src/app/model/client.model';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-clients',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class ClientsComponent {
 
+  clients: Client[] | undefined;
+
+  constructor(private clientService:ClientService){}
+
+    ngOnInit(){
+      this.clientService.getClients().subscribe(
+        clients => {
+          this.clients = clients;
+        }
+      );
+    }
 }

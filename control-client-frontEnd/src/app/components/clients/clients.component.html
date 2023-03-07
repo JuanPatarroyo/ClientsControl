@@ -1,1 +1,41 @@
-<p>clients works!</p>
+<section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addModal">
+                    <i class="fas fa-plus"></i> Add Client
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- clients list -->
+<section id="clients">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>List of clients</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of clients; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{client.name}} {{client.last_name}}</td>
+                                <td>{{client.saldo | currency: 'COP': '$'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
