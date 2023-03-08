@@ -11,13 +11,23 @@ export class ClientsComponent {
 
   clients: Client[] | undefined;
 
-  constructor(private clientService:ClientService){}
+  constructor(private clientService: ClientService) { }
 
-    ngOnInit(){
-      this.clientService.getClients().subscribe(
-        clients => {
-          this.clients = clients;
-        }
-      );
+  ngOnInit() {
+    this.clientService.getClients().subscribe(
+      clients => {
+        this.clients = clients;
+      }
+    );
+  }
+
+  getTotal() {
+    let balance: number = 0;
+    if(this.clients != null){
+      this.clients.forEach(client =>{
+        balance += client.saldo;
+      })
     }
+    return balance;
+  }
 }

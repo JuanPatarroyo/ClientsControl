@@ -24,6 +24,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Balance</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,11 +32,47 @@
                                 <td>{{i+1}}</td>
                                 <td>{{client.name}} {{client.last_name}}</td>
                                 <td>{{client.saldo | currency: 'COP': '$'}}</td>
+                                <td>
+                                    <a routerLink="/client/update/{{client.id}}" class="btn btn-secondary">
+                                        <i class="fas fa-pencil"></i> Edit
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            <!-- cards -->
+            <div class="col-md-3">
+                <div class="card text-center bg-danger text-white mb-3">
+                    <div class="card-body">
+                        <h3>General balance</h3>
+                        <h4 class="display-4">{{getTotal() | currency: 'COP': '$'}}</h4>
+                    </div>
+                </div>
+
+                <div class="card text-center bg-success text-white mb-3">
+                    <div class="card-body">
+                        <h3>Clients</h3>
+                        <h4 class="display-4">
+                            <i class="fas fa-users"></i> {{clients?.length}}
+                        </h4>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+<!-- modal -->
+<div id="addModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Add client</h5>
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
