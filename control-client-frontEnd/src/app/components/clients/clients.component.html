@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addModal">
+                <a href="#" (click)="open(content)" class="btn btn-primary btn-block">
                     <i class="fas fa-plus"></i> Add Client
                 </a>
             </div>
@@ -64,15 +64,34 @@
     </div>
 </section>
 <!-- modal -->
-<div id="addModal" class="modal fade">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title">Add client</h5>
-                <button class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
+<ng-template #content let-modal class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Add new Client</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
+        <form>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" name="lastname" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="balance">Balance</label>
+                    <input type="number" name="balance" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
     </div>
-</div>
+</ng-template>

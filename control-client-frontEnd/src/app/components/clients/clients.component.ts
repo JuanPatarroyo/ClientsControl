@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from 'src/app/model/client.model';
 import { ClientService } from 'src/app/services/client.service';
 
@@ -8,10 +9,11 @@ import { ClientService } from 'src/app/services/client.service';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent {
-
+  closeResult = '';
   clients: Client[] | undefined;
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.clientService.getClients().subscribe(
@@ -23,11 +25,32 @@ export class ClientsComponent {
 
   getTotal() {
     let balance: number = 0;
-    if(this.clients != null){
-      this.clients.forEach(client =>{
+    if (this.clients != null) {
+      this.clients.forEach(client => {
         balance += client.saldo;
       })
     }
     return balance;
   }
+
+  open(content: any) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+			(result) => {
+				this.closeResult = `Closed with: ${result}`;
+			},
+			(reason) => {
+				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+			},
+		);
+	}
+
+  private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'by clicking on a backdrop';
+		} else {
+			return `with: ${reason}`;
+		}
+	}
 }
