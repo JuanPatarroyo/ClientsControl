@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from 'src/app/model/client.model';
 import { ClientService } from 'src/app/services/client.service';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component({
   selector: 'app-clients',
@@ -40,6 +41,11 @@ export class ClientsComponent {
       })
     }
     return balance;
+  }
+
+  addClient(value: Client) {
+    Notify.failure('The form is not valid.');
+    // method new client
   }
 
   /**

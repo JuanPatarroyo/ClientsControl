@@ -70,27 +70,41 @@
             <h4 class="modal-title" id="modal-basic-title">Add new Client</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
-        <form #clientForm="ngForm" (ngSubmit)="add(clientForm)">
+        <form #clientForm="ngForm" (ngSubmit)="addClient(clientForm)" novalidate>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control" 
-                    #name="ngModel" [(ngModel)]="client.name" 
-                    [ngClass]="{'is-invalid': name.errors && name.touched}" required minlength="2"/>
-                    <div [hidden]="!name.errors?.required" class="invalid-feedback">Name required</div>
-                    <div [hidden]="!name.errors?.minlength" class="invalid-feedback">It must contains at least 2 characters</div>
+                    <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="client.name"
+                        [ngClass]="{'is-invalid': name.errors && name.touched}" required minlength="2" />
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                        <div *ngIf="name.errors?.['required']">
+                            Name is required.
+                        </div>
+                        <div *ngIf="name.errors?.['minlength']">
+                            Name must be at least 2 characters long.
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Lastname</label>
-                    <input type="text" name="lastname" class="form-control" />
+                    <input type="text" name="lastname" class="form-control" #lastname="ngModel" [(ngModel)]="client.last_name"
+                        [ngClass]="{'is-invalid': lastname.errors && lastname.touched}" required minlength="2" />
+                    <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert">
+                        <div *ngIf="lastname.errors?.['required']">
+                            Lastname is required.
+                        </div>
+                        <div *ngIf="lastname.errors?.['minlength']">
+                            Lastname must be at least 2 characters long.
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" />
+                    <input type="email" name="email" class="form-control" [(ngModel)]="client.email"/>
                 </div>
                 <div class="form-group">
                     <label for="balance">Balance</label>
-                    <input type="number" name="balance" class="form-control" />
+                    <input type="number" name="balance" class="form-control" [(ngModel)]="client.saldo"/>
                 </div>
             </div>
             <div class="modal-footer">
