@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <a href="#" (click)="open(content)" class="btn btn-primary btn-block">
+                <a href="#" (click)="openModal(content)" class="btn btn-primary btn-block">
                     <i class="fas fa-plus"></i> Add Client
                 </a>
             </div>
@@ -70,11 +70,15 @@
             <h4 class="modal-title" id="modal-basic-title">Add new Client</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
-        <form>
+        <form #clientForm="ngForm" (ngSubmit)="add(clientForm)">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control" />
+                    <input type="text" name="name" class="form-control" 
+                    #name="ngModel" [(ngModel)]="client.name" 
+                    [ngClass]="{'is-invalid': name.errors && name.touched}" required minlength="2"/>
+                    <div [hidden]="!name.errors?.required" class="invalid-feedback">Name required</div>
+                    <div [hidden]="!name.errors?.minlength" class="invalid-feedback">It must contains at least 2 characters</div>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Lastname</label>

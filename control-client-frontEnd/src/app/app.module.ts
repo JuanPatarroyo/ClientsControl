@@ -40,6 +40,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     AppRoutingModule,
     RouterModule,
     NgbModule,
+    FormsModule,
     provideFirebaseApp(
       () => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
