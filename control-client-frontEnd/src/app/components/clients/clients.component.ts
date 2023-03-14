@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from 'src/app/model/client.model';
 import { ClientService } from 'src/app/services/client.service';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { NgForm } from '@angular/forms';
+import { Report } from 'notiflix';
 
 @Component({
   selector: 'app-clients',
@@ -19,6 +21,8 @@ export class ClientsComponent {
     email: '',
     saldo: 0
   }
+  @ViewChild("clientForm") clientForm: NgForm | undefined;
+  @ViewChild("btnClose") btnClose: ElementRef | undefined;
   // Modal vars
   closeResult = '';
 
@@ -43,9 +47,17 @@ export class ClientsComponent {
     return balance;
   }
 
-  addClient(value: Client) {
-    Notify.failure('The form is not valid.');
-    // method new client
+  addClient(form: NgForm) {
+    if(!form.valid){
+      Report.failure(
+        'Oh no!',
+        'Some fields are missing to fill out, check it out',
+        'Ok!');
+      return;
+    }
+    this.clientService.addClient(this.client);
+    this.clientForm?.resetForm();
+    this.closeModal();
   }
 
   /**
@@ -71,5 +83,9 @@ export class ClientsComponent {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  private closeModal(){
+    this.btnClose?.nativeElement.click();
   }
 }
