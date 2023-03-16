@@ -21,8 +21,9 @@ export class ClientsComponent {
     email: '',
     saldo: 0
   }
-  @ViewChild("clientForm") clientForm: NgForm | undefined;
+
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
+
   // Modal vars
   closeResult = '';
 
@@ -56,8 +57,8 @@ export class ClientsComponent {
       return;
     }
     this.clientService.addClient(this.client);
-    this.clientForm?.resetForm();
-    this.closeModal();
+    form.resetForm();
+    this.modalService.dismissAll();
   }
 
   /**

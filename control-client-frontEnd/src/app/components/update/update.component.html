@@ -1,1 +1,106 @@
-<p>update works!</p>
+<header id="main-header" class="py-2 bg-info text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    <i class="fas fa-user"></i> Edit client
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<form #clientForm="ngForm" (ngSubmit)="saveClient(clientForm); clientForm.resetForm()" novalidate>
+
+    <section id="actions" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a routerLink="/" class="btn btn-light btn-block">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <a href="#" (click)="delete()" class="btn btn-danger btn-block">
+                        <i class="fas fa-trash"></i> Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Edit Client</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" class="form-control" #name="ngModel"
+                                    [(ngModel)]="client.name" [ngClass]="{'is-invalid': name.errors && name.touched}"
+                                    required minlength="2" />
+                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                                    <div *ngIf="name.errors?.['required']">
+                                        Name is required.
+                                    </div>
+                                    <div *ngIf="name.errors?.['minlength']">
+                                        Name must be at least 2 characters long.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Lastname</label>
+                                <input type="text" name="lastname" class="form-control" #lastname="ngModel"
+                                    [(ngModel)]="client.last_name"
+                                    [ngClass]="{'is-invalid': lastname.errors && lastname.touched}" required
+                                    minlength="2" />
+                                <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="alert">
+                                    <div *ngIf="lastname.errors?.['required']">
+                                        Lastname is required.
+                                    </div>
+                                    <div *ngIf="lastname.errors?.['minlength']">
+                                        Lastname must be at least 2 characters long.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" #email="ngModel"
+                                    [(ngModel)]="client.email" [ngClass]="{'is-invalid': email.errors && email.touched}"
+                                    required email="true" />
+                                <div *ngIf="email.invalid && (name.dirty || email.touched)" class="alert">
+                                    <div *ngIf="email.errors?.['required']">
+                                        Email is required.
+                                    </div>
+                                    <div *ngIf="email.errors?.['email']">
+                                        Email address is not valid.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="balance">Balance</label>
+                                <input type="number" name="balance" class="form-control" #balance="ngModel"
+                                    [(ngModel)]="client.saldo"
+                                    [ngClass]="{'is-invalid': balance.errors && balance.touched}" required />
+                                <div *ngIf="balance.invalid && (balance.dirty || balance.touched)" class="alert">
+                                    <div *ngIf="balance.errors?.['required']">
+                                        Balance is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

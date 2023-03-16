@@ -68,9 +68,9 @@
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Add new Client</h4>
-            <button type="button" class="btn-close" aria-label="Close" #btnClose (click)="modal.dismiss('Cross click')"></button>
+            <button id="btnClose" type="button" class="btn-close" aria-label="Close" #btnClose (click)="modal.dismiss('Cross click')"></button>
         </div>
-        <form #clientForm="ngForm" (ngSubmit)="addClient(clientForm)" novalidate>
+        <form #clientForm="ngForm" (ngSubmit)="addClient(clientForm); clientForm.resetForm()" novalidate>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="name">Name</label>
