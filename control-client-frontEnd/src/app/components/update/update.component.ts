@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from 'src/app/model/client.model';
 import { ClientService } from 'src/app/services/client.service';
+import { Report } from 'notiflix';
 
 @Component({
   selector: 'app-update',
@@ -36,10 +37,22 @@ export class UpdateComponent {
   }
 
   saveClient(form: NgForm) {
+    if (!form.valid) {
+      Report.failure(
+        'Oh no!',
+        'Some fields are missing to fill out, check it out',
+        'Ok!');
+      return;
+    }
 
+    this.clientService.saveClient(this.client);
+    this.router.navigate(['/']);
   }
 
   delete() {
-
+    if (confirm('Are you sure to delete this client?')) {
+      this.clientService.deleteClient(this.client);
+      this.router.navigate(['/']);
+    }
   }
 }

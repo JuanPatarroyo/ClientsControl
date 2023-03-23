@@ -46,4 +46,14 @@ export class ClientService{
         );
         return this.client;
     }
+
+    saveClient(client: Client){
+        this.clientDoc = this.db.doc(`clients/${client.id}`);
+        this.clientDoc.update(client);
+    }
+
+    deleteClient(client: Client){
+        this.clientDoc = this.db.doc(`clients/${client.id}`);
+        this.clientDoc.delete();
+    }
 }
