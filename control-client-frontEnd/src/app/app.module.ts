@@ -22,6 +22,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { ClientService } from './services/client.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { CommonModule } from '@angular/common';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
     )
   ],
-  providers: [ClientService,
+  providers: [ClientService, LoginService,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
 })
