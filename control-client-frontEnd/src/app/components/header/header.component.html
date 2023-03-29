@@ -7,7 +7,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-
         <div class="collapse navbar-collapse" id="navbarColor01" [ngbCollapse]="toggleNavbar">
             <ul class="navbar-nav" *ngIf="isLoggedIn">
                 <li class="nav-item px-2">
@@ -20,13 +19,17 @@
                     <a routerLink="/configuration" class="nav-link">Configuration</a>
                 </li>
                 <li class="nav-item" *ngIf="!isLoggedIn">
-                    <a routerLink="/login" class="nav-link">
+                    <a routerLink="/login" class="nav-link" routerLinkActive="router-link-active">
                         <i class="fas fa-user"></i> Login
                     </a>
                 </li>
+                <li class="nav-item" *ngIf="!isLoggedIn && allowRegister">
+                    <a routerLink="/register" class="nav-link" routerLinkActive="router-link-active">
+                        <i class="fas fa-user"></i> Register
+                    </a>
+                </li>
                 <li class="nav-item" *ngIf="isLoggedIn">
-                    <a style="cursor: pointer;" (click)="logout()"></a>
-                    <a routerLink="/login" class="nav-link">
+                    <a (click)="logout()" class="nav-link" style="cursor: pointer;">
                         <i class="fas fa-user-times"></i> Logout
                     </a>
                 </li>

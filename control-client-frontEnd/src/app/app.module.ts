@@ -23,6 +23,9 @@ import { ClientService } from './services/client.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { CommonModule } from '@angular/common';
 import { LoginService } from './services/login.service';
+import { AuthGuard } from './guards/auth.guard';
+import { ConfigurationService } from './services/configuration.service';
+import { ConfigurationGuard } from './guards/configuration.guard';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,7 @@ import { LoginService } from './services/login.service';
     CommonModule
     )
   ],
-  providers: [ClientService, LoginService,
+  providers: [ClientService, LoginService, AuthGuard, ConfigurationService, ConfigurationGuard,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
 })
